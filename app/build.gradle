@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "ru.romananchugov.filmsmvvm"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(":domain")
+    api project(":data")
+
+    //TODO: check nuzhnost' of all libs
+
+    //Core
+    implementation dependency.kotlinStdLib
+    implementation dependency.appCompat
+
+    //KTX
+    implementation dependency.ktxCore
+    implementation dependency.ktxLifecycleViewModel
+    implementation dependency.ktxLifecycleLifeData
+    implementation dependency.ktxFragment
+
+    //Kotlin reflect
+    implementation dependency.kotlinReflect
+
+    //NavigationComponent
+    implementation dependency.navFragment
+    implementation dependency.navUi
+
+    //Timber
+    implementation dependency.timber
+
+    //Koin(DI)
+    implementation dependency.koinCore
+    implementation dependency.koinAndroid
+
+    //VM, LiveData
+    implementation dependency.lifecycle
+
+    //Constraint
+    implementation dependency.constraintLayout
+
+    //Room
+    implementation dependency.room
+
+    //Rx
+    implementation dependency.rxKotlin
+    implementation dependency.rxAndroid
+}
