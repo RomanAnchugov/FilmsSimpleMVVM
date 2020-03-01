@@ -31,6 +31,8 @@ ext {
 
     rxKotlinVersion = '3.0.0'
 
+    glideVersion = '4.11.0'
+
     dependency = [
 
             //Core
@@ -76,6 +78,9 @@ ext {
 
             //RxKotlin
             rxKotlin             : "io.reactivex.rxjava3:rxjava:$rxKotlinVersion",
-            rxAndroid            : "io.reactivex.rxjava3:rxandroid:$rxKotlinVersion"
+            rxAndroid            : "io.reactivex.rxjava3:rxandroid:$rxKotlinVersion",
+
+            //GLide
+            glide                : "com.github.bumptech.glide:glide:$glideVersion"
     ]
 }

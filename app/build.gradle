@@ -71,4 +71,7 @@ dependencies {
     //Rx
     implementation dependency.rxKotlin
     implementation dependency.rxAndroid
+
+    //Glide
+    implementation dependency.glide
 }

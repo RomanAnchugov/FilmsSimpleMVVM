@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.romananchugov.filmsmvvm.domain.use_case.FilmsListUseCase
 import ru.romananchugov.filmsmvvm.model.FilmsListPresentationModel
-import ru.romananchugov.filmsmvvm.model.ext.toPresentationModel
+import ru.romananchugov.filmsmvvm.model.toPresentationModel
 import timber.log.Timber
 
 class FilmsListViewModel(

@@ -11,3 +11,13 @@ data class FilmItemNWResponse(
     @field:Json(name = "overview") val overview: String,
     @field:Json(name = "release_date") val releaseData: String
 )
+
+fun FilmItemNWResponse.toDataModel() = FilmItemDataModel(
+    id = id,
+    title = title,
+    voteAverage = voteAverage,
+    posterPath = posterPath,
+    backdropPath = backdropPath,
+    overview = overview,
+    releaseData = releaseData
+)

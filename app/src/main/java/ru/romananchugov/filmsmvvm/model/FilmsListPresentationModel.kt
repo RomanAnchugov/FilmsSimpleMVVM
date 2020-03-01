@@ -1,5 +1,11 @@
 package ru.romananchugov.filmsmvvm.model
 
+import ru.romananchugov.filmsmvvm.domain.model.FilmsListDomainModel
+
 data class FilmsListPresentationModel(
-    val test: Int = 0
+    val filmsList: List<FilmsItemPresentationModel>
+)
+
+fun FilmsListDomainModel.toPresentationModel() = FilmsListPresentationModel(
+    filmsList = filmsList.map { it.toPresentationModel() }
 )

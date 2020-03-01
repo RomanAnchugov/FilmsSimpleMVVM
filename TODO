@@ -1,10 +1,7 @@
 TODO
-1. Setup DI
-- add gitignore => Commit
-2. Test clean one call method
-3. Add retrofit request(moshi, converters)
-4. Mavigation component
-5. Navi
-
-Bugs
-1. If we put koin-modules in android modules, app will crash. Reason?
+5. Setup recycler
+6. Make full recycler with design
+7. Create second screen with description
+8. Updating by time
+9. Caching
+10. Package and gradle butification

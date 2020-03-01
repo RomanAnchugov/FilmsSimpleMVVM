@@ -2,6 +2,7 @@ package ru.romananchugov.filmsmvvm.data.model
 
 import com.squareup.moshi.Json
 import ru.romananchugov.filmsmvvm.domain.model.FilmsListDomainModel
+import java.util.*
 
 
 data class FilmsNWResponse(
@@ -11,6 +12,7 @@ data class FilmsNWResponse(
     @field:Json(name = "results") val result: List<FilmItemNWResponse>
 )
 
-fun FilmsNWResponse.toDomainModel() = FilmsListDomainModel(
-    lol = this.page
+fun FilmsNWResponse.toDataModel() = FilmsListDataModel(
+    loadTimeMillis = Calendar.getInstance().timeInMillis,
+    filmsList = this.result.map { it.toDataModel() }
 )
