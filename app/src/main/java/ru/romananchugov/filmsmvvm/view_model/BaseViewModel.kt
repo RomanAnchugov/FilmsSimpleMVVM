@@ -8,8 +8,6 @@ abstract class BaseViewModel : ViewModel() {
 
     private var compositeDisposable = CompositeDisposable()
 
-    abstract fun init()
-
     fun saveSubscribe(action: () -> Disposable) {
         compositeDisposable.add(action())
     }

@@ -1,6 +1,5 @@
 package ru.romananchugov.filmsmvvm.ui.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_film.view.*
 import ru.romananchugov.filmsmvvm.R
-import ru.romananchugov.filmsmvvm.model.FilmsItemPresentationModel
+import ru.romananchugov.filmsmvvm.model.FilmItemPresentationModel
 
-class FilmsListAdapter :
-    ListAdapter<FilmsItemPresentationModel, FilmsListAdapter.ViewHolder>(FilmsListDiffCallback()) {
+class FilmsListAdapter(
+    private val itemClickListener: ((item: FilmItemPresentationModel) -> Unit)?
+) :
+    ListAdapter<FilmItemPresentationModel, FilmsListAdapter.ViewHolder>(FilmsListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -34,32 +35,36 @@ class FilmsListAdapter :
         private val filmTitle = viewItem.film_title_tv
         private val filmVoteAverage = viewItem.film_vote_average_tv
 
-        fun bind(item: FilmsItemPresentationModel) {
+        fun bind(item: FilmItemPresentationModel) {
+            viewItem.setOnClickListener {
+                itemClickListener?.invoke(item)
+            }
+
             Glide
                 .with(filmImage.context)
                 .load(item.posterPath)
                 .centerCrop()
                 .into(filmImage)
 
+            //TODO: rating color depend on number
             filmTitle.text = item.title
             filmVoteAverage.text = item.voteAverage.toString()
         }
     }
 
-    //TODO
-    class FilmsListDiffCallback : DiffUtil.ItemCallback<FilmsItemPresentationModel>() {
+    class FilmsListDiffCallback : DiffUtil.ItemCallback<FilmItemPresentationModel>() {
         override fun areItemsTheSame(
-            oldItem: FilmsItemPresentationModel,
-            newItem: FilmsItemPresentationModel
+            oldItem: FilmItemPresentationModel,
+            newItem: FilmItemPresentationModel
         ): Boolean {
-            return false
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: FilmsItemPresentationModel,
-            newItem: FilmsItemPresentationModel
+            oldItem: FilmItemPresentationModel,
+            newItem: FilmItemPresentationModel
         ): Boolean {
-            return false
+            return oldItem.title == newItem.title
         }
 
     }

@@ -1,6 +1,5 @@
 package ru.romananchugov.filmsmvvm.data.model
 
-import com.squareup.moshi.Json
 import ru.romananchugov.filmsmvvm.domain.model.FilmItemDomainModel
 import ru.romananchugov.filmsmvvm.domain.repository.FilmsListRepository
 
@@ -17,8 +16,8 @@ data class FilmItemDataModel(
 fun FilmItemDataModel.toDomainModel() = FilmItemDomainModel(
     title = title,
     voteAverage = voteAverage,
-    posterPath = FilmsListRepository.FILMS_IMAGE_BASE_URL + posterPath,
-    backdropPath = FilmsListRepository.FILMS_IMAGE_BASE_URL + backdropPath,
+    posterPath = FilmsListRepository.FILMS_IMAGE_SMALL_BASE_URL + posterPath,
+    backdropPath = FilmsListRepository.FILMS_IMAGE_BIG_BASE_URL + backdropPath,
     overview = overview,
     releaseData = releaseData
 )

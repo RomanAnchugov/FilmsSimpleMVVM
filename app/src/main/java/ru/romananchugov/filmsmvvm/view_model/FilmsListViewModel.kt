@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.romananchugov.filmsmvvm.domain.use_case.FilmsListUseCase
+import ru.romananchugov.filmsmvvm.model.FilmItemPresentationModel
 import ru.romananchugov.filmsmvvm.model.FilmsListPresentationModel
 import ru.romananchugov.filmsmvvm.model.toPresentationModel
 import timber.log.Timber
@@ -17,15 +18,24 @@ class FilmsListViewModel(
     val filmsListLiveData: LiveData<FilmsListPresentationModel>
         get() = _filmsListLiveData
 
-    private val _isError: MutableLiveData<Boolean?> = MutableLiveData()
+    private val _isError: MutableLiveData<Boolean?> = MutableLiveData(null)
     val isError: LiveData<Boolean?>
         get() = _isError
 
-    private val _isLoading: MutableLiveData<Boolean?> = MutableLiveData()
+    private val _isLoading: MutableLiveData<Boolean?> = MutableLiveData(null)
     val isLoading: LiveData<Boolean?>
         get() = _isLoading
 
-    override fun init() = saveSubscribe {
+    private val _navigationToDescription: MutableLiveData<FilmItemPresentationModel?> =
+        MutableLiveData(null)
+    val navigationToDescription: LiveData<FilmItemPresentationModel?>
+        get() = _navigationToDescription
+
+    init {
+        loadData()
+    }
+
+    private fun loadData() = saveSubscribe {
         useCase.getFilmsList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -45,5 +55,15 @@ class FilmsListViewModel(
                 }
             )
 
+    }
+
+    fun onListItemClick(item: FilmItemPresentationModel) {
+        _navigationToDescription.value = item
+    }
+
+    fun onPause() {
+        _navigationToDescription.value = null
+        _isError.value = null
+        _isLoading.value = null
     }
 }

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/filmsListFragment">
 
     <fragment
         android:id="@+id/filmsListFragment"
         android:name="ru.romananchugov.filmsmvvm.ui.fragments.FilmsListFragment"
-        android:label="FilmsListFragment" />
+        android:label="FilmsListFragment" >
+        <action
+            android:id="@+id/action_filmsListFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmDetailsFragment"
+        android:name="ru.romananchugov.filmsmvvm.ui.fragments.FilmDetailsFragment"
+        android:label="fragment_film_details"
+        tools:layout="@layout/fragment_film_details" >
+        <argument
+            android:name="filmItem"
+            app:argType="ru.romananchugov.filmsmvvm.model.FilmItemPresentationModel" />
+    </fragment>
 </navigation>

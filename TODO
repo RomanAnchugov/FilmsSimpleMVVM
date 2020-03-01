@@ -1,7 +1,14 @@
 TODO
-5. Setup recycler
-6. Make full recycler with design
 7. Create second screen with description
+ - show loading
+ - handle error
 8. Updating by time
 9. Caching
+
 10. Package and gradle butification
+11. Clean todos
+
+
+After submiting
+1. Paging
+2. SwipeRefresh
