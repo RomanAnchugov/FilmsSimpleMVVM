@@ -3,15 +3,17 @@ package ru.romananchugov.filmsmvvm.data
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import ru.romananchugov.filmsmvvm.data.data_source.AppDataBase
 import ru.romananchugov.filmsmvvm.data.data_source.FilmsService
 import ru.romananchugov.filmsmvvm.data.repository.FilmsListRepositoryImpl
 import ru.romananchugov.filmsmvvm.domain.repository.FilmsListRepository
 
 val dataModule = module {
-    single { FilmsListRepositoryImpl(get()) as FilmsListRepository }
+    single { FilmsListRepositoryImpl(get(), get()) as FilmsListRepository }
 
     single { provideHttpLoggingInterceptor() }
 
@@ -20,6 +22,8 @@ val dataModule = module {
     single { provideRetrofit(get()) }
 
     single { provideConverterService(get()) }
+
+    single { AppDataBase.getInstance(androidContext()) }
 }
 
 private fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {

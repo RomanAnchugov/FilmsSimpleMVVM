@@ -27,7 +27,7 @@ ext {
 
     loggingInterceptorVersion = '4.2.1'
 
-    roomVersion = '2.2.2'
+    roomVersion = '2.2.4'
 
     rxKotlinVersion = '3.0.0'
 
@@ -74,7 +74,7 @@ ext {
 
             //Room
             room                 : "androidx.room:room-runtime:$roomVersion",
-            roomRx               : "androidx.room:room-rxjava2:$roomVersion",
+            roomCompiler         : "androidx.room:room-compiler:$roomVersion",
 
             //RxKotlin
             rxKotlin             : "io.reactivex.rxjava3:rxjava:$rxKotlinVersion",

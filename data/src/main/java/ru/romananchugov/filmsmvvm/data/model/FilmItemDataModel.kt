@@ -1,10 +1,13 @@
 package ru.romananchugov.filmsmvvm.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import ru.romananchugov.filmsmvvm.domain.model.FilmItemDomainModel
 import ru.romananchugov.filmsmvvm.domain.repository.FilmsListRepository
 
+@Entity(tableName = "films")
 data class FilmItemDataModel(
-    val id: Long,
+    @PrimaryKey val id: Long,
     val title: String,//required
     val voteAverage: Float,
     val posterPath: String,//required

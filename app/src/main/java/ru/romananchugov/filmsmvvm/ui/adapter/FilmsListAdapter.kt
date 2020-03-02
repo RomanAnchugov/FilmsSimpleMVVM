@@ -3,6 +3,7 @@ package ru.romananchugov.filmsmvvm.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -46,9 +47,31 @@ class FilmsListAdapter(
                 .centerCrop()
                 .into(filmImage)
 
-            //TODO: rating color depend on number
+
             filmTitle.text = item.title
+
+
+            val ratingColor = when (item.voteAverage) {
+                in 0f..5f -> R.color.red
+                in 5f..7f -> R.color.dark_orange
+                in 7f..8f -> R.color.light_orange
+                in 8f..10f -> R.color.green
+                else -> R.color.gray
+            }
+
             filmVoteAverage.text = item.voteAverage.toString()
+            filmVoteAverage.background.setTint(
+                ContextCompat.getColor(
+                    filmVoteAverage.context,
+                    ratingColor
+                )
+            )
+
+            if (item.voteAverage == 0f) {
+                filmVoteAverage.visibility = View.GONE
+            } else {
+                filmVoteAverage.visibility = View.VISIBLE
+            }
         }
     }
 

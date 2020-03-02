@@ -14,6 +14,10 @@ class FilmsListViewModel(
     private val useCase: FilmsListUseCase
 ) : BaseViewModel() {
 
+    companion object {
+        private const val TAG = "FilmsListViewModel"
+    }
+
     private val _filmsListLiveData: MutableLiveData<FilmsListPresentationModel> = MutableLiveData()
     val filmsListLiveData: LiveData<FilmsListPresentationModel>
         get() = _filmsListLiveData
@@ -50,7 +54,7 @@ class FilmsListViewModel(
                     _filmsListLiveData.value = it.toPresentationModel()
                 },
                 {
-                    Timber.tag("LOL").i("Error: $it")
+                    Timber.tag(TAG).i("Error: $it")
                     _isError.value = true
                 }
             )
