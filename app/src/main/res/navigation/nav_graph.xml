@@ -11,7 +11,11 @@
         android:label="FilmsListFragment" >
         <action
             android:id="@+id/action_filmsListFragment_to_filmDetailsFragment"
-            app:destination="@id/filmDetailsFragment" />
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
     </fragment>
     <fragment
         android:id="@+id/filmDetailsFragment"
