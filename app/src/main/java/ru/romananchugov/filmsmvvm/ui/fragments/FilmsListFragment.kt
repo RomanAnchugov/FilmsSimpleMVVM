@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_films_list.*
 import org.koin.android.ext.android.inject
 import ru.romananchugov.filmsmvvm.R
@@ -27,6 +28,7 @@ class FilmsListFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer {
+            films_list_rv.visibility = View.VISIBLE
             adapter.submitList(it.filmsList)
         })
 
@@ -36,6 +38,31 @@ class FilmsListFragment : BaseFragment() {
                     val direction =
                         FilmsListFragmentDirections.actionFilmsListFragmentToFilmDetailsFragment(it)
                     findNavController().navigate(direction)
+                }
+            }
+        )
+
+        viewModel.isError.observe(
+            viewLifecycleOwner, Observer {
+                it?.let {
+                    Snackbar.make(
+                        requireView(),
+                        R.string.error_with_retry,
+                        Snackbar.LENGTH_INDEFINITE
+                    ).setAction(R.string.retry) {
+                        viewModel.onErrorRetryClicked()
+                    }
+                        .show()
+                }
+            }
+        )
+
+        viewModel.isLoading.observe(
+            viewLifecycleOwner, Observer {
+                it?.let {
+                    films_list_loader_pb.visibility = View.VISIBLE
+                } ?: run {
+                    films_list_loader_pb.visibility = View.GONE
                 }
             }
         )

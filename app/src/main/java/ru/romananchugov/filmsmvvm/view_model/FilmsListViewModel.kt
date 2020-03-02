@@ -44,6 +44,7 @@ class FilmsListViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
+                _isError.value = null
                 _isLoading.value = true
             }
             .doFinally {
@@ -63,6 +64,10 @@ class FilmsListViewModel(
 
     fun onListItemClick(item: FilmItemPresentationModel) {
         _navigationToDescription.value = item
+    }
+
+    fun onErrorRetryClicked() {
+        loadData()
     }
 
     fun onPause() {

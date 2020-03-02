@@ -8,7 +8,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "ru.romananchugov.filmsmvvm"
         minSdkVersion 21
@@ -38,8 +38,6 @@ dependencies {
 
     api project(":domain")
     api project(":data")
-
-    //TODO: check nuzhnost' of all libs
 
     //Core
     implementation dependency.kotlinStdLib
@@ -75,7 +73,7 @@ dependencies {
     implementation dependency.room
 
     //Rx
-    implementation dependency.rxKotlin
+    implementation dependency.rxJava
     implementation dependency.rxAndroid
 
     //Glide

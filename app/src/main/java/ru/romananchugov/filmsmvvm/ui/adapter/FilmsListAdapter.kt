@@ -52,10 +52,10 @@ class FilmsListAdapter(
 
 
             val ratingColor = when (item.voteAverage) {
-                in 0f..5f -> R.color.red
-                in 5f..7f -> R.color.dark_orange
-                in 7f..8f -> R.color.light_orange
-                in 8f..10f -> R.color.green
+                in 0f..4f -> R.color.red
+                in 4f..6f -> R.color.dark_orange
+                in 6f..7.4f -> R.color.light_orange
+                in 7.4f..10f -> R.color.green
                 else -> R.color.gray
             }
 
